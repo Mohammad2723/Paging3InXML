@@ -1,6 +1,6 @@
 package com.github.ebrahimi16153.paging3inxml.repository
 
-import com.github.ebrahimi16153.paging3inxml.models.api.ApiService
+import com.github.ebrahimi16153.paging3inxml.api.ApiService
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(private val apiService: ApiService) {

@@ -1,7 +1,7 @@
-package com.github.ebrahimi16153.paging3inxml.models.di
+package com.github.ebrahimi16153.paging3inxml.di
 
-import com.github.ebrahimi16153.paging3inxml.models.api.ApiService
-import com.github.ebrahimi16153.paging3inxml.models.util.Constant
+import com.github.ebrahimi16153.paging3inxml.api.ApiService
+import com.github.ebrahimi16153.paging3inxml.util.Constant
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

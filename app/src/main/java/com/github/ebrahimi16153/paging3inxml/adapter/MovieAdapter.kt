@@ -24,6 +24,7 @@ class MovieAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: MovieAdapter.ViewHolder, position: Int) {
         holder.setData(getItem(position)!!)
+        holder.setIsRecyclable(false)
     }
 
     inner class ViewHolder() : RecyclerView.ViewHolder(binding.root) {
