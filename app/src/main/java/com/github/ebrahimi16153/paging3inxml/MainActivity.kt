@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.ebrahimi16153.paging3inxml.adapter.LoadMoreAdapter
 import com.github.ebrahimi16153.paging3inxml.adapter.MovieAdapter
 import com.github.ebrahimi16153.paging3inxml.databinding.ActivityMainBinding
 import com.github.ebrahimi16153.paging3inxml.viewmodel.MovieViewModel
@@ -36,22 +37,16 @@ class MainActivity : AppCompatActivity() {
             //load data
             lifecycleScope.launch {
                 viewModel.movieList.collect {
-
                     movieAdapter.submitData(it)
-
                 }
             }
-
             lifecycleScope.launch {
-
-                movieAdapter.loadStateFlow.collect{
-
+                movieAdapter.loadStateFlow.collect {
                     val state = it.refresh
 
                     // LoadState  is feature of PagingDataAdapter
                     loading.isVisible = state is LoadState.Loading
                 }
-
             }
 
             //recycler
@@ -62,12 +57,21 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-
             // swipe to refresh
             swipeToRefresh.setOnRefreshListener {
                 swipeToRefresh.isRefreshing = false
                 movieAdapter.refresh()
             }
+
+            //loadMore
+
+            recyclerView.adapter = movieAdapter.withLoadStateFooter(
+                LoadMoreAdapter(setOnItemRetryClick = {
+
+                    movieAdapter.retry()
+
+                })
+            )
 
         }
     }
