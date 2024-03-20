@@ -76,7 +76,12 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
 
     // viewModels
-    implementation ("androidx.activity:activity-ktx:1.8.2")
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation (libs.androidx.activity.ktx)
+    implementation (libs.androidx.fragment.ktx)
+
+    //swipe to refresh
+    implementation (libs.androidx.swiperefreshlayout)
+
+
 
 }

@@ -6,7 +6,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ebrahimi16153.paging3inxml.adapter.MovieAdapter
 import com.github.ebrahimi16153.paging3inxml.databinding.ActivityMainBinding
@@ -44,12 +46,31 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            lifecycleScope.launch {
+
+                movieAdapter.loadStateFlow.collect{
+
+                    val state = it.refresh
+
+                    // LoadState  is feature of PagingDataAdapter
+                    loading.isVisible = state is LoadState.Loading
+                }
+
+            }
+
             //recycler
             recyclerView.apply {
 
                 adapter = movieAdapter
                 layoutManager = LinearLayoutManager(this@MainActivity)
 
+            }
+
+
+            // swipe to refresh
+            swipeToRefresh.setOnRefreshListener {
+                swipeToRefresh.isRefreshing = false
+                movieAdapter.refresh()
             }
 
         }
